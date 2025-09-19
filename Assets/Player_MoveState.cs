@@ -15,7 +15,7 @@ public class Player_MoveState : EntityState
 
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (player.moveInput.x == 0)
         {
             stateMachine.ChangeState(this.player.idleState);
         }
