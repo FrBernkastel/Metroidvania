@@ -3,25 +3,29 @@ using UnityEngine;
 public abstract class EntityState
 {
     protected Player player;
+    protected Rigidbody2D rb;
+    protected Animator anim;
     protected StateMachine stateMachine;
-    protected string stateName;
+    protected string animBoolName;
 
     public EntityState(Player player, StateMachine stateMachine, string stateName)
     {
         this.player = player;
+        this.rb = player.rb;
+        this.anim = player.anim;
         this.stateMachine = stateMachine;
-        this.stateName = stateName;
+        this.animBoolName = stateName;
     }
 
     public virtual void Enter()
     {
-        Debug.Log("I enter state " + this.stateName);
+        this.anim.SetBool(animBoolName, true);
     }
 
     public abstract void Update();
 
     public virtual void Exit()
     {
-        Debug.Log("I exit state " + this.stateName);
+        this.anim.SetBool(animBoolName, false);
     }
 }

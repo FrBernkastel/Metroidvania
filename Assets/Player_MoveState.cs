@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player_MoveState : EntityState
 {
     public Player_MoveState(Player player, StateMachine stateMachine)
-        : base(player, stateMachine: stateMachine, stateName: "Move")
+        : base(player, stateMachine: stateMachine, stateName: "move")
     {
 
     }
@@ -19,6 +19,8 @@ public class Player_MoveState : EntityState
         {
             stateMachine.ChangeState(this.player.idleState);
         }
+
+        player.SetVelocity(player.moveSpeed * player.moveInput.x, rb.linearVelocityY);
     }
 
     //public override void Exit()

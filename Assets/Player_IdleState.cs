@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player_IdleState : EntityState
 {
     public Player_IdleState(Player player, StateMachine stateMachine)
-        : base(player, stateMachine: stateMachine, stateName: "Idle")
+        : base(player, stateMachine: stateMachine, stateName: "idle")
     {
 
     }
