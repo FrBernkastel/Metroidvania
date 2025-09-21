@@ -1,28 +1,26 @@
 using UnityEngine;
 
-public class Player_IdleState : EntityState
+public class Player_IdleState : Player_GroundedState
 {
-    public Player_IdleState(Player player, StateMachine stateMachine)
-        : base(player, stateMachine: stateMachine, stateName: "idle")
+    public Player_IdleState(Player player, StateMachine stateMachine, string animBoolName)
+        : base(player, stateMachine: stateMachine, animBoolName: animBoolName)
     {
 
     }
 
-    //public override void Enter()
-    //{
-
-    //}
+    public override void Enter()
+    {
+        player.SetVelocity(0, rb.linearVelocityY);    
+    }
 
     public override void Update()
     {
+        base.Update();
+
         if (player.moveInput.x != 0)
         {
             stateMachine.ChangeState(this.player.moveState);
         }
     }
 
-    //public override void Exit()
-    //{
-
-    //}
 }

@@ -6,17 +6,27 @@ public class Player : MonoBehaviour
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
 
-    private PlayerInputSet input;
+    public PlayerInputSet input { get; private set; }
     public StateMachine stateMachine { get; private set; }
 
     public Player_IdleState idleState { get; private set; }
     public Player_MoveState moveState { get; private set; }
+    public Player_JumpState jumpState { get; private set; }
+    public Player_FallState fallState { get; private set; }
 
+    // Input Flag
     public Vector2 moveInput;
 
     [Header("Movement details")]
     public float moveSpeed;
+    public float jumpForce = 5f;
+    [Range(0f, 1f)] public float inAirMultiplier = 0.85f;
     private bool facedRight = true;
+
+    [Header("Collision detection")]
+    [SerializeField] private float groundCheckDistance;
+    [SerializeField] private LayerMask whatIsGround;
+    public bool groundDetected { get; private set; }
 
     private void Awake()
     {
@@ -26,8 +36,10 @@ public class Player : MonoBehaviour
         stateMachine = new StateMachine();
         input = new PlayerInputSet(); // parameterless create
 
-        idleState = new Player_IdleState(this, stateMachine);
-        moveState = new Player_MoveState(this, stateMachine);
+        idleState = new Player_IdleState(this, stateMachine, "idle");
+        moveState = new Player_MoveState(this, stateMachine, "move");
+        jumpState = new Player_JumpState(this, stateMachine, "jumpFall");
+        fallState = new Player_FallState(this, stateMachine, "jumpFall");
     }
 
     private void OnEnable()
@@ -53,7 +65,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        HandleColisionDetection();
         stateMachine.UpdateStateActivity();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
     }
 
     public void SetVelocity(float xVelocity, float yVelocity)
@@ -64,12 +82,12 @@ public class Player : MonoBehaviour
 
     private void HandleFlip(float xVelocity)
     {
-        if(facedRight && xVelocity < 0)
+        if (facedRight && xVelocity < 0)
         {
             Flip();
         }
 
-        if(!facedRight && xVelocity > 0)
+        if (!facedRight && xVelocity > 0)
         {
             Flip();
         }
@@ -79,5 +97,10 @@ public class Player : MonoBehaviour
     {
         transform.Rotate(0, 180, 0);
         facedRight = !facedRight;
+    }
+
+    private void HandleColisionDetection()
+    {
+        groundDetected = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
     }
 }
