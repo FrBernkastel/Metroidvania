@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,6 +14,8 @@ public class Player : MonoBehaviour
     public Player_MoveState moveState { get; private set; }
     public Player_JumpState jumpState { get; private set; }
     public Player_FallState fallState { get; private set; }
+    public Player_WallSlideState wallSlideState { get; private set; }
+    public Player_WallJumpState wallJumpState { get; private set; }
 
     // Input Flag
     public Vector2 moveInput;
@@ -20,13 +23,18 @@ public class Player : MonoBehaviour
     [Header("Movement details")]
     public float moveSpeed;
     public float jumpForce = 5f;
+    public Vector2 wallJumpForce;
     [Range(0f, 1f)] public float inAirMultiplier = 0.85f;
-    private bool facedRight = true;
+    [Range(0f, 1f)] public float wallSlideSlowMultiplier = 0.3f;
+    private bool facingRight = true;
+    public int facingDir => facingRight ? 1 : -1;
 
     [Header("Collision detection")]
     [SerializeField] private float groundCheckDistance;
+    [SerializeField] private float wallCheckDistance;
     [SerializeField] private LayerMask whatIsGround;
     public bool groundDetected { get; private set; }
+    public bool wallDetected { get; private set; }
 
     private void Awake()
     {
@@ -40,6 +48,8 @@ public class Player : MonoBehaviour
         moveState = new Player_MoveState(this, stateMachine, "move");
         jumpState = new Player_JumpState(this, stateMachine, "jumpFall");
         fallState = new Player_FallState(this, stateMachine, "jumpFall");
+        wallSlideState = new Player_WallSlideState(this, stateMachine, "wallSlide");
+        wallJumpState = new Player_WallJumpState(this, stateMachine, "jumpFall");
     }
 
     private void OnEnable()
@@ -72,6 +82,8 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -groundCheckDistance));
+        int facingDir = facingRight ? 1 : -1;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(wallCheckDistance * facingDir, 0));
     }
 
     public void SetVelocity(float xVelocity, float yVelocity)
@@ -80,27 +92,28 @@ public class Player : MonoBehaviour
         HandleFlip(xVelocity);
     }
 
-    private void HandleFlip(float xVelocity)
-    {
-        if (facedRight && xVelocity < 0)
-        {
-            Flip();
-        }
-
-        if (!facedRight && xVelocity > 0)
-        {
-            Flip();
-        }
-    }
-
-    private void Flip()
+    public void Flip()
     {
         transform.Rotate(0, 180, 0);
-        facedRight = !facedRight;
+        facingRight = !facingRight;
+    }
+
+    private void HandleFlip(float xVelocity)
+    {
+        if (facingRight && xVelocity < 0)
+        {
+            Flip();
+        }
+
+        if (!facingRight && xVelocity > 0)
+        {
+            Flip();
+        }
     }
 
     private void HandleColisionDetection()
     {
         groundDetected = Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, whatIsGround);
+        wallDetected = Physics2D.Raycast(transform.position, facingRight ? Vector2.right : Vector2.left, wallCheckDistance, whatIsGround);
     }
 }
