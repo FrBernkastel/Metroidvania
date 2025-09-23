@@ -18,7 +18,7 @@ public class Player_JumpState : Player_AiredState
     {
         base.Update();
 
-        if (rb.linearVelocityY < 0)  // bug if vY == 0 ?
+        if (rb.linearVelocityY < 0 && stateMachine.currentState == player.jumpState)  // bug if vY == 0 ?
         {
             stateMachine.ChangeState(player.fallState);
         }
