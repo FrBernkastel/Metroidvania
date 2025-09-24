@@ -23,10 +23,12 @@ public class Player_WallSlideState : EntityState
         {
             stateMachine.ChangeState(player.fallState);
         }
-        else if (player.groundDetected)
+        if (player.groundDetected)
         {
+
             stateMachine.ChangeState(player.idleState);
-            player.Flip();
+            if(player.moveInput.x == 0)
+                player.Flip();
         }
     }
 
