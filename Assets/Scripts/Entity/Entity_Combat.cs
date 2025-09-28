@@ -13,9 +13,11 @@ public class Entity_Combat : MonoBehaviour
     {
         Collider2D[] targetColliders = GetDetectedColliders();
 
-        foreach(var collider in targetColliders)
+        foreach (var target in targetColliders)
         {
-            Debug.Log("Attacking:" + collider.name);
+            Entity_Health targetHealth = target.GetComponent<Entity_Health>();
+
+            targetHealth?.TakeDamage(1);
         }
     }
 
