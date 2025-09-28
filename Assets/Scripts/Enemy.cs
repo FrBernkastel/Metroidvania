@@ -4,9 +4,23 @@ public class Enemy : Entity
 {
     public Enemy_IdleState idleState;
     public Enemy_MoveState moveState;
+    public Enemy_AttackState attackState;
+    public Enemy_BattleState battleState;
 
     [Header("Movement details")]
     public float idleTime = 2;
     public float moveSpeed = 1.4f;
     [Range(0, 2)] public float moveAnimSpeedMultiplier = 1;
+
+    [Header("Player detection")]
+    [SerializeField] private LayerMask whatIsPlayer;
+    [SerializeField] private Transform playerCheck;
+    [SerializeField] private float playerCheckDistance = 10f;
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * playerCheckDistance), playerCheck.position.y));
+    }
 }

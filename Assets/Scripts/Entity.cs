@@ -38,7 +38,7 @@ public class Entity : MonoBehaviour
         stateMachine.UpdateStateActivity();
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, groundCheck.position + new Vector3(0, -groundCheckDistance));
         int facingDir = facingRight ? 1 : -1;

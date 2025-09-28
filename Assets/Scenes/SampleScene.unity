@@ -91181,7 +91181,7 @@ GameObject:
   - component: {fileID: 489777722}
   - component: {fileID: 489777724}
   - component: {fileID: 489777723}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: EnemySkeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91197,7 +91197,7 @@ Transform:
   m_GameObject: {fileID: 489777720}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 158.83, y: 9.57, z: -0.5912455}
+  m_LocalPosition: {x: 158.614, y: 9.312, z: -0.5912455}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -91228,6 +91228,11 @@ MonoBehaviour:
   idleTime: 2
   moveSpeed: 1.4
   moveAnimSpeedMultiplier: 1
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  playerCheck: {fileID: 489777721}
+  playerCheckDistance: 6.37
 --- !u!70 &489777723
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -91458,7 +91463,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 144.4683, y: 5.203679, z: -9.840207}
+  m_LocalPosition: {x: 156.86894, y: 5.219534, z: -9.840207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -142668,7 +142673,7 @@ GameObject:
   - component: {fileID: 961287278}
   - component: {fileID: 961287280}
   - component: {fileID: 961287281}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142719,7 +142724,7 @@ Transform:
   m_GameObject: {fileID: 961287277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 149.17, y: 9.68, z: 0}
+  m_LocalPosition: {x: 161.56, y: 12.34, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -142851,7 +142856,7 @@ Transform:
   m_GameObject: {fileID: 1194593589}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 144.45921, y: 7.451357, z: -9.840207}
+  m_LocalPosition: {x: 156.84921, y: 10.111357, z: -9.840207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -143185,6 +143190,7 @@ GameObject:
   - component: {fileID: 1354459786}
   - component: {fileID: 1354459788}
   - component: {fileID: 1354459787}
+  - component: {fileID: 1354459789}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -143284,6 +143290,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1354459789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354459785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16480eab6b951ac4d9c49a40728abe78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1524519029
 GameObject:
   m_ObjectHideFlags: 0
