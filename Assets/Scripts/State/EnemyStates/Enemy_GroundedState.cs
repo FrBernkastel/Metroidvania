@@ -11,6 +11,9 @@ public class Enemy_GroundedState : EnemyState
     {
         base.Update();
 
-        // If Player detected, enter the BattleState
+        if(enemy.PlayerDetection())
+        {
+            stateMachine.ChangeState(enemy.battleState);
+        }
     }
 }
