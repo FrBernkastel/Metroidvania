@@ -91181,6 +91181,7 @@ GameObject:
   - component: {fileID: 489777722}
   - component: {fileID: 489777724}
   - component: {fileID: 489777723}
+  - component: {fileID: 489777725}
   m_Layer: 8
   m_Name: EnemySkeleton
   m_TagString: Untagged
@@ -91203,6 +91204,7 @@ Transform:
   m_Children:
   - {fileID: 1354459786}
   - {fileID: 1524519030}
+  - {fileID: 2044720497}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &489777722
@@ -91302,6 +91304,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &489777725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 489777720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcd85d688b29a844ac36acc0bffedcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColliders: []
+  targetCheck: {fileID: 2044720497}
+  targetCheckRadius: 2
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &494698542
 GameObject:
   m_ObjectHideFlags: 0
@@ -142678,6 +142698,7 @@ GameObject:
   - component: {fileID: 961287278}
   - component: {fileID: 961287280}
   - component: {fileID: 961287281}
+  - component: {fileID: 961287282}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -142736,6 +142757,7 @@ Transform:
   - {fileID: 1936313268}
   - {fileID: 1171778310}
   - {fileID: 381047447}
+  - {fileID: 1344020935}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &961287280
@@ -142802,6 +142824,26 @@ CapsuleCollider2D:
   m_Offset: {x: 0.015028238, y: -0.34324622}
   m_Size: {x: 0.75521517, y: 1.9600878}
   m_Direction: 0
+--- !u!114 &961287282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961287277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcd85d688b29a844ac36acc0bffedcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetColliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  targetCheck: {fileID: 1344020935}
+  targetCheckRadius: 1.5
+  whatIsTarget:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1171778309
 GameObject:
   m_ObjectHideFlags: 0
@@ -143184,6 +143226,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1344020934
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1344020935}
+  m_Layer: 7
+  m_Name: TargetCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1344020935
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344020934}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.25, y: -0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 961287279}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354459785
 GameObject:
   m_ObjectHideFlags: 0
@@ -143599,14 +143672,45 @@ PolygonCollider2D:
       - {x: -20.425802, y: -55.463737}
       - {x: 130.72675, y: -56.67884}
   m_UseDelaunayMesh: 0
+--- !u!1 &2044720496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2044720497}
+  m_Layer: 8
+  m_Name: TargetCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2044720497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044720496}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.786, y: -0.247, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 489777721}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 494698543}
   - {fileID: 619394802}
-  - {fileID: 961287279}
   - {fileID: 936868231}
   - {fileID: 1297405109}
   - {fileID: 1974228598}
   - {fileID: 489777721}
+  - {fileID: 961287279}
